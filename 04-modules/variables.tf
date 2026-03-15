@@ -16,3 +16,24 @@ variable "environment" {
   type        = string
   default     = "dev"
 }
+
+variable "create_logs_bucket" {
+  description = "Whether to create a logs bucket (used with count)"
+  type        = bool
+  default     = true
+}
+
+variable "team_buckets" {
+  description = "Map of team buckets to create (used with for_each)"
+  type = map(object({
+    enable_versioning = bool
+  }))
+  default = {
+    analytics = {
+      enable_versioning = true
+    }
+    engineering = {
+      enable_versioning = false
+    }
+  }
+}
